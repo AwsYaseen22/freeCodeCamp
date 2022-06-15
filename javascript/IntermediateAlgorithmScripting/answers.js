@@ -252,6 +252,31 @@ function sumPrimes(num) {
   return result.reduce((acc, cur) => acc + cur, 0);
 }
 
-console.log(sumPrimes(977));
+// console.log(sumPrimes(977));
+
+// ######################################################
+
+// Smallest Common Multiple
+
+function smallestCommons(arr) {
+  let max = Math.max(...arr);
+  let min = Math.min(...arr);
+  let limit = 1;
+  let between = [];
+  for (let i = min; i <= max; i++) {
+    between.push(i);
+    limit *= i;
+  }
+  let result = [];
+  for (let i = 2; i < limit; i++) {
+    if (between.every((n) => i % n === 0)) {
+      return i;
+    }
+  }
+  // console.log(limit, between, result);
+}
+
+// console.log(smallestCommons([1, 5]));
+// console.log(smallestCommons([2, 10]));
 
 // ######################################################
