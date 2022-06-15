@@ -171,6 +171,25 @@ function fearNotLetter(str) {
   return result.length > 0 ? result : undefined;
 }
 
-console.log(fearNotLetter("abcg"));
+// console.log(fearNotLetter("abcg"));
+
+// ######################################################
+
+// Sorted Union
+
+function uniteUnique(arr) {
+  let result = [];
+  let args = Object.keys(arguments);
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < arguments[i].length; j++) {
+      if (!result.includes(arguments[i][j])) {
+        result.push(arguments[i][j]);
+      }
+    }
+  }
+  return result;
+}
+
+// console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 
 // ######################################################
