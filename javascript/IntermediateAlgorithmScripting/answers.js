@@ -233,3 +233,25 @@ function sumFibs(num) {
 // console.log(sumFibs(75025));
 
 // ######################################################
+
+// Sum All Primes
+
+function sumPrimes(num) {
+  let result = [];
+  for (let i = 2; i <= num; i++) {
+    let temp = [];
+    for (let j = 2; j <= i; j++) {
+      if (i % j === 0) {
+        temp.push(j);
+      }
+    }
+    if (temp.length === 1) {
+      result.push(i);
+    }
+  }
+  return result.reduce((acc, cur) => acc + cur, 0);
+}
+
+console.log(sumPrimes(977));
+
+// ######################################################
