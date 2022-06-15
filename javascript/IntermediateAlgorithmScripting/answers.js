@@ -73,3 +73,35 @@ function whatIsInAName(collection, source) {
 // );
 
 // ######################################################
+
+// Spinal Tap Case
+
+function spinalCase(str) {
+  let refined = str;
+
+  return refined
+    .split("")
+    .map((e, i, arr) => {
+      // console.log(e, i, arr);
+      if (i > 0 && e.toLowerCase() !== e) {
+        if (/[a-z]/.test(arr[i - 1])) {
+          return " " + e;
+        } else {
+          return e;
+        }
+      } else {
+        return e;
+      }
+    })
+    .join("")
+    .toLowerCase()
+    .split(/[ ._-]/)
+    .join("-");
+}
+
+// console.log(spinalCase("This Is_Spinal Tap"));
+// console.log(spinalCase("thisIsSpinalTap"));
+// console.log(spinalCase("This Is Spinal Tap"));
+// console.log(spinalCase("The_Andy_Griffith_Show"));
+
+// ######################################################
