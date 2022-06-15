@@ -152,6 +152,25 @@ function pairElement(str) {
   return str.split("").map((e) => [e, dnaObj[e]]);
 }
 
-console.log(pairElement("GCG"));
+// console.log(pairElement("GCG"));
+
+// ######################################################
+
+// Misising letters
+
+function fearNotLetter(str) {
+  let letters = "abcdefghijklmnopqrstuvwxyz";
+  let chunk = letters.slice(
+    letters.indexOf(str[0]),
+    letters.indexOf(str[str.length - 1]) + 1
+  );
+  let result = chunk
+    .split("")
+    .filter((e) => !str.includes(e))
+    .join("");
+  return result.length > 0 ? result : undefined;
+}
+
+console.log(fearNotLetter("abcg"));
 
 // ######################################################
