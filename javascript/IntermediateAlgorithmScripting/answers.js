@@ -105,3 +105,24 @@ function spinalCase(str) {
 // console.log(spinalCase("The_Andy_Griffith_Show"));
 
 // ######################################################
+
+// Pig Latin
+
+function translatePigLatin(str) {
+  let vowels = "aeiou".split("");
+  for (let i = 0; i < str.length; i++) {
+    if (vowels.includes(str[i])) {
+      if (i > 0) {
+        return str.slice(i) + str.slice(0, i) + "ay";
+      } else {
+        return str + "way";
+      }
+    }
+  }
+  return str + "ay";
+}
+
+// console.log(translatePigLatin("consonant"));
+// console.log(translatePigLatin("rhythm"));
+
+// ######################################################
