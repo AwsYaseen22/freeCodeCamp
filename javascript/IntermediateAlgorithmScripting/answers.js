@@ -30,3 +30,14 @@ function diffArray(arr1, arr2) {
 // console.log(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]));
 
 // ######################################################
+
+// Seek and Destroy
+
+function destroyer(arr) {
+  let argArr = Object.values(arguments).slice(1);
+  return arr.filter((e) => !argArr.includes(e));
+}
+
+// console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
+
+// ######################################################
