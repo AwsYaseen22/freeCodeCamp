@@ -214,3 +214,22 @@ function convertHTML(str) {
 // console.log(convertHTML("Dolce & Gabbana"));
 
 // ######################################################
+
+// Sum All Odd Fibonacci Numbers
+
+function sumFibs(num) {
+  let fib = [1, 1];
+  let last = fib[fib.length - 1] + fib[fib.length - 2];
+  while (last <= num) {
+    fib.push(last);
+    last = fib[fib.length - 1] + fib[fib.length - 2];
+  }
+  return fib.filter((e) => e % 2 !== 0).reduce((acc, cur) => (acc += cur), 0);
+}
+
+// console.log(sumFibs(10));
+// console.log(sumFibs(4));
+// console.log(sumFibs(1));
+// console.log(sumFibs(75025));
+
+// ######################################################
