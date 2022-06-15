@@ -347,3 +347,27 @@ function truthCheck(collection, pre) {
 // );
 
 // ######################################################
+
+// Arguments Optional
+
+function addTogether() {
+  let arg = Object.values(arguments);
+  if (arg.some((n) => typeof n !== "number")) {
+    return undefined;
+  }
+  if (arg.length === 2) {
+    return arg[0] + arg[1];
+  } else {
+    return function (num) {
+      if (typeof num !== "number") {
+        return undefined;
+      }
+      return arg[0] + num;
+    };
+  }
+}
+
+// console.log(addTogether(2, 3));
+// console.log(addTogether(5)(7));
+
+// ######################################################
