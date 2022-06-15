@@ -193,3 +193,24 @@ function uniteUnique(arr) {
 // console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 
 // ######################################################
+
+// Convert HTML Entities
+
+function convertHTML(str) {
+  let symb = "&<>\"'".split("");
+  let enti = ["&amp;", "&lt;", "&gt;", "&quot;", "&apos;"];
+  return str
+    .split("")
+    .map((l) => {
+      if (symb.includes(l)) {
+        return enti[symb.indexOf(l)];
+      } else {
+        return l;
+      }
+    })
+    .join("");
+}
+
+// console.log(convertHTML("Dolce & Gabbana"));
+
+// ######################################################
