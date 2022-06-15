@@ -299,3 +299,15 @@ function dropElements(arr, func) {
 // );
 
 // ######################################################
+
+// Steamroller
+
+function steamrollArray(arr) {
+  let result = [].concat(...arr);
+  return result.some((e) => Array.isArray(e)) ? steamrollArray(result) : result;
+}
+
+// console.log(steamrollArray([1, [2], [3, [[4]]]]));
+// console.log(steamrollArray([1, {}, [3, [[4]]]]));
+
+// ######################################################
