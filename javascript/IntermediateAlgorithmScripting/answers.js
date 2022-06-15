@@ -126,3 +126,21 @@ function translatePigLatin(str) {
 // console.log(translatePigLatin("rhythm"));
 
 // ######################################################
+
+// Search and Replace
+
+function myReplace(str, before, after) {
+  if (before[0].toLowerCase() !== before[0]) {
+    after = after.slice(0, 1).toUpperCase() + after.slice(1);
+  } else {
+    after = after.slice(0, 1).toLowerCase() + after.slice(1);
+  }
+  return str.replace(before, after);
+}
+
+// console.log(
+//   myReplace("A quick brown fox Jumped over the lazy dog", "Jumped", "leaped")
+// );
+// console.log(myReplace("I think we should look up there", "up", "Down"));
+
+// ######################################################
