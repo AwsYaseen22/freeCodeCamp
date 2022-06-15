@@ -144,3 +144,14 @@ function myReplace(str, before, after) {
 // console.log(myReplace("I think we should look up there", "up", "Down"));
 
 // ######################################################
+
+// DNA Pairing
+
+function pairElement(str) {
+  let dnaObj = { A: "T", T: "A", C: "G", G: "C" };
+  return str.split("").map((e) => [e, dnaObj[e]]);
+}
+
+console.log(pairElement("GCG"));
+
+// ######################################################
