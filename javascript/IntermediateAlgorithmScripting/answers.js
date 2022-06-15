@@ -41,3 +41,35 @@ function destroyer(arr) {
 // console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3));
 
 // ######################################################
+
+// Wherefore art thou
+
+function whatIsInAName(collection, source) {
+  const arr = [];
+  // Only change code below this line
+  let sourceArr = Object.keys(source);
+  for (let i = 0; i < collection.length; i++) {
+    let result = [];
+    for (let j = 0; j < sourceArr.length; j++) {
+      result.push(collection[i][sourceArr[j]] === source[sourceArr[j]]);
+    }
+    if (result.every((b) => b === true)) {
+      arr.push(collection[i]);
+    }
+  }
+  // Only change code above this line
+  return arr;
+}
+
+// console.log(
+//   whatIsInAName(
+//     [
+//       { first: "Romeo", last: "Montague" },
+//       { first: "Mercutio", last: null },
+//       { first: "Tybalt", last: "Capulet" },
+//     ],
+//     { last: "Capulet" }
+//   )
+// );
+
+// ######################################################
