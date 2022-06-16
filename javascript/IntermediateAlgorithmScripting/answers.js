@@ -371,3 +371,42 @@ function addTogether() {
 // console.log(addTogether(5)(7));
 
 // ######################################################
+
+// Make a Person
+
+const Person = function (firstAndLast) {
+  // Only change code below this line
+  // Complete the method below and implement the others similarly
+  this.getFullName = function () {
+    return firstAndLast;
+  };
+  this.getFirstName = function () {
+    return firstAndLast.split(" ")[0];
+  };
+  this.getLastName = function () {
+    return firstAndLast.split(" ")[1];
+  };
+  this.setFirstName = function (first) {
+    let fullArr = firstAndLast.split(" ");
+    fullArr[0] = first;
+    firstAndLast = fullArr.join(" ");
+  };
+  this.setLastName = function (last) {
+    let fullArr = firstAndLast.split(" ");
+    fullArr[1] = last;
+    firstAndLast = fullArr.join(" ");
+  };
+  this.setFullName = function (newFull) {
+    firstAndLast = newFull;
+    return firstAndLast;
+  };
+};
+
+// const bob = new Person("Bob Ross");
+
+// bob.setFirstName("Haskell");
+// console.log(bob.getFirstName("Haskell"));
+
+// console.log(bob.getFullName());
+
+// ######################################################
