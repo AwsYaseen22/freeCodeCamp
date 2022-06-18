@@ -21,33 +21,32 @@ function checkCashRegister(price, cash, cid) {
 
   if (change === fund) {
     result.status = "CLOSED";
-    // return result;
   }
 
-  console.log(cid, change);
-  let arr = [];
+  let obj = {};
+  // console.log(cid, change, fund);
   while (change > 0) {
+    fund = cid.reduce((acc, cur) => acc + cur[1], 0);
     if (change > fund) {
       result.status = "INSUFFICIENT_FUNDS";
       return result;
     }
+    // console.log(change);
     for (let i = 0; i < cid.length; i++) {
       if (change >= cid[i][2] && cid[i][1] !== 0) {
-        //   console.log(cid);
-        //   console.log(
-        //     "change: ",
-        //     change,
-        //     "value: ",
-        //     cid[i][2],
-        //     "cash: ",
-        //     cid[i][1]
-        //   );
-        //   console.log(i, cid[i][1]);
         cid[i][1] -= cid[i][2];
-        change -= cid[i][2];
-        arr.push([cid[i][0], cid[i][2]]);
-        console.log(change);
+        change = Number((change - cid[i][2]).toFixed(2));
+        if (obj[cid[i][0]]) {
+          obj[cid[i][0]] += cid[i][2];
+        } else {
+          obj[cid[i][0]] = cid[i][2];
+        }
         break;
+      }
+      if (i === cid.length - 1 && change < fund) {
+        result.status = "INSUFFICIENT_FUNDS";
+        result.change = [];
+        return result;
       }
     }
   }
@@ -55,34 +54,24 @@ function checkCashRegister(price, cash, cid) {
   if (result.status === "") {
     result.status = "OPEN";
   }
-
+  let arr = [];
+  for (const key in obj) {
+    arr.push([key, obj[key]]);
+  }
   result.change = arr;
   return result;
 }
 
 console.log(
-  checkCashRegister(1, 20, [
-    ["PENNY", 1.01],
-    ["NICKEL", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90],
-    ["FIVE", 55],
-    ["TEN", 20],
-    ["TWENTY", 60],
-    ["ONE HUNDRED", 100],
-  ])
-);
-console.log(
   checkCashRegister(19.5, 20, [
-    ["PENNY", 1.01],
-    ["NICKEL", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90],
-    ["FIVE", 55],
-    ["TEN", 20],
-    ["TWENTY", 60],
-    ["ONE HUNDRED", 100],
+    ["PENNY", 0.5],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0],
   ])
 );
