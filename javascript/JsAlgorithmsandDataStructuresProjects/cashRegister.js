@@ -14,56 +14,49 @@ function checkCashRegister(price, cash, cid) {
     "ONE HUNDRED": 100,
   };
   let change = cash - price;
-  cid.forEach((e) => e.push(money[e[0]]));
-  cid = cid.sort((a, b) => b[2] - a[2]);
+  let cidCopy = [...cid];
 
-  let fund = (100 * cid.reduce((acc, cur) => acc + cur[1], 0)) / 100;
+  cidCopy.forEach((e) => e.push(money[e[0]]));
+  cidCopy = cidCopy.sort((a, b) => b[2] - a[2]);
+  let fund = cidCopy.reduce((acc, cur) => acc + cur[1], 0);
 
-  //   this one is greate i can use it
-  //   it test if the we can change
   let canIChange = () => {
-    console.log(change);
     let amount = change;
-    cid.forEach((item) => {
-      console.log(amount, item[1], item[2]);
+    cidCopy.forEach((item) => {
       if (amount >= item[2] && item[1] > 0) {
         amount = Number(
           (amount - Math.floor(amount / item[2]) * item[2]).toFixed(2)
         );
       }
     });
-    console.log("amount: ", amount);
     return amount === 0;
   };
 
-  if (change > fund || !canIChange()) {
-    result.status = "INSUFFICIENT_FUNDS";
-    return result;
-  }
-  if (change === fund) {
+  if (change === fund && canIChange()) {
     result.status = "CLOSED";
     result.change = cid.map((e) => e.slice(0, 2));
     return result;
   }
 
   let obj = {};
-  console.log(cid, change, fund);
   while (change > 0) {
-    fund = cid.reduce((acc, cur) => acc + cur[1], 0);
-    // console.log(change);
-    for (let i = 0; i < cid.length; i++) {
-      if (change >= cid[i][2] && cid[i][1] !== 0) {
-        // console.log(change, cid[i][1], cid[i][2]);
-        cid[i][1] = Number(cid[i][1] - cid[i][2]).toFixed(2);
-        change = Number((change - cid[i][2]).toFixed(2));
-        if (obj[cid[i][0]]) {
-          obj[cid[i][0]] = obj[cid[i][0]] + Number(cid[i][2].toFixed(2));
+    fund = cidCopy.reduce((acc, cur) => acc + cur[1], 0);
+    if (change > fund) {
+      result.status = "INSUFFICIENT_FUNDS";
+      return result;
+    }
+    for (let i = 0; i < cidCopy.length; i++) {
+      if (change >= cidCopy[i][2] && cidCopy[i][1] !== 0) {
+        cidCopy[i][1] -= cidCopy[i][2];
+        change = Number((change - cidCopy[i][2]).toFixed(2));
+        if (obj[cidCopy[i][0]]) {
+          obj[cidCopy[i][0]] += cidCopy[i][2];
         } else {
-          obj[cid[i][0]] = cid[i][2];
+          obj[cidCopy[i][0]] = cidCopy[i][2];
         }
         break;
       }
-      if (i === cid.length - 1 && change < fund) {
+      if (i === cidCopy.length - 1 && change < fund) {
         result.status = "INSUFFICIENT_FUNDS";
         result.change = [];
         return result;
