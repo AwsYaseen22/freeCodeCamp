@@ -33,11 +33,13 @@ app.get("/api/", (req, res) => {
 
 app.get("/api/:date", (req, res) => {
   let date = req.params.date;
-  console.log(date);
+
   let unix, utc;
   if (Number.isInteger(Number(date))) {
     utc = new Date(Number(date)).toUTCString();
     unix = Number(date);
+  } else if (!new Date(date).getDate()) {
+    res.status(401).json({ error: "Invalid Date" });
   } else {
     unix = new Date(date).getTime();
     utc = new Date(date).toUTCString();
