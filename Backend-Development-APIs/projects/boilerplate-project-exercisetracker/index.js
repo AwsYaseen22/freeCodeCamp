@@ -27,16 +27,6 @@ let userSchema = new Schema({
 
 let User = new mongoose.model("User", userSchema);
 
-let createNewUser = async (username) => {
-  try {
-    let createdUser = await User.create({ username: username });
-    console.log(createdUser);
-    return createdUser;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 // when get the logs
 // {
 // "_id": "62b21a15179bfa0908269af7",
@@ -73,10 +63,18 @@ app.get("/", (req, res) => {
 });
 
 // Create new user
-app.post("/api/users", (req, res) => {
-  console.log(req.body.username);
+app.post("/api/users", async (req, res) => {
   const username = req.body.username;
-  createNewUser(username);
+  try {
+    let createdUser = await User.create({ username: username });
+    res.json({
+      username: createdUser.username,
+      _id: createdUser._id,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 });
 
 const listener = app.listen(process.env.PORT || 3000, () => {
