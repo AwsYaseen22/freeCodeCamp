@@ -19,22 +19,15 @@ mongoose.connect(connectionURI, { useNewUrlParser: true }, () => {
 
 let Schema = mongoose.Schema;
 
-exerciseSchema = new Schema({
-  description: { type: String, required: true },
-  duration: { type: String, required: true },
-  date: Date,
-});
-
 // User Schema
 let userSchema = new Schema({
   username: { type: String, required: true },
-  log: [exerciseSchema],
+  log: [],
 });
 
-let Exercise = new mongoose.model("Exercise", exerciseSchema);
 let User = new mongoose.model("User", userSchema);
 
-// try
+// logger
 app.use(({ method, url, query, params, body }, res, next) => {
   console.log(">>> ", method, url);
   console.log(" QUERY:", query);
@@ -118,7 +111,8 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
 });
 
 app.get("/api/users/:_id/logs", async (req, res) => {
-  console.log("GET /api/users/:_id/logs");
+  let { from, to, limit } = req.query;
+  limit = Number(limit);
   let id = req.params._id;
   let foundUser = await User.findOne({ _id: id }).select({
     _id: true,
@@ -126,8 +120,48 @@ app.get("/api/users/:_id/logs", async (req, res) => {
     log: true,
     count: true,
   });
-  foundUser._doc.count = foundUser._doc.log.length;
-  res.json(foundUser);
+  // foundUser._doc.count = foundUser._doc.log.length;
+
+  let refined = foundUser._doc;
+  refined.count = refined.log.length;
+
+  if (from || to) {
+    let fromDate = new Date(0);
+    let toDate = new Date();
+    if (from) {
+      fromDate = new Date(from);
+    }
+    if (to) {
+      toDate = new Date(to);
+    }
+
+    fromDate = fromDate.getTime();
+    toDate = toDate.getTime();
+
+    refined.log = refined.log.filter((ex) => {
+      let exDate = new Date(ex.date).getTime();
+      console.log("%%%%%%%%%%%%");
+      console.log(exDate, fromDate);
+      console.log("%%%%%%%%%%%%");
+      return exDate >= fromDate && exDate <= toDate;
+    });
+    refined.count = refined.log.length;
+    foundUser._doc.log = foundUser._doc.log.filter((ex) => {
+      let exDate = new Date(ex.date).getTime();
+      return exDate >= fromDate && exDate <= toDate;
+    });
+  }
+  if (limit) {
+    // foundUser.log = foundUser.log.slice(0, Number(limit));
+    refined.log = refined.log.slice(0, limit);
+    refined.count = refined.log.length;
+  }
+  console.log("**********************");
+  console.log(refined);
+  console.log("**********************");
+
+  res.json(refined);
+  // res.json(refined);
 });
 
 const listener = app.listen(process.env.PORT || 3000, () => {
