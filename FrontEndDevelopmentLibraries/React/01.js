@@ -1,7 +1,9 @@
 // 01
+// Create a Simple JSX Element
 // const JSX = <h1>Hello JSX!</h1>
 
 // 02
+// Create a Complex JSX Element
 // const JSX = <div>
 //     {/* this is a comment */}
 //     <h1>React</h1>
@@ -14,6 +16,7 @@
 // </div>
 
 // 03
+// Add Comments in JSX
 // const JSX = (
 //     <div>
 //         <h1>Hello World</h1>
@@ -25,6 +28,7 @@
 
 
 // 04
+// Render HTML Elements to the DOM
 // const JSX = (
 //     <div className="myDiv">
 //         <h1>Add a class to this div</h1>
@@ -33,6 +37,7 @@
 
 
 // 05
+// Define an HTML Class in JSX
 // const JSX = (
 //     <div>
 //         <h2>Welcome to React!</h2>
@@ -44,6 +49,7 @@
 
 
 // 06
+// Learn About Self-Closing JSX Tags
 // const MyComponent = function () {
 //     // Change code below this line
 //     return (
@@ -56,6 +62,7 @@
 
 
 // 07
+// Create a Stateless Functional Component
 // class MyComponent extends React.Component {
 //     constructor( props ) {
 //         super( props );
@@ -73,6 +80,7 @@
 
 
 // 08
+// Create a React Component
 // const ChildComponent = () => {
 //     return (
 //         <div>
@@ -99,6 +107,7 @@
 
 
 // 09
+// Create a Component with Composition
 // const TypesOfFruit = () => {
 //     return (
 //         <div>
@@ -142,6 +151,7 @@
 
 
 // 10
+// Use React to Render Nested Components
 // class Fruits extends React.Component {
 //     constructor( props ) {
 //         super( props );
@@ -178,6 +188,7 @@
 
 
 // 11
+// Compose React Components
 // class TypesOfFood extends React.Component {
 //     constructor( props ) {
 //         super( props );
@@ -195,10 +206,13 @@
 //     }
 // };
 
+// 12
+// Render a Class Component to the DOM
 // // Change code below this line
 // ReactDOM.render( <TypesOfFood />, document.getElementById( 'challenge-node' ) )
 
-// 12
+// 13
+// Write a React Component from Scratch
 // Change code below this line
 // class MyComponent extends React.Component {
 //     constructor( props ) {
@@ -217,3 +231,5 @@
 
 
 // 13
+// Pass Props to a Stateless Functional Component
+
