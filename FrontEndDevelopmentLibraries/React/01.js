@@ -230,6 +230,34 @@
 // ReactDOM.render( <MyComponent />, document.getElementById( 'challenge-node' ) )
 
 
-// 13
-// Pass Props to a Stateless Functional Component
+
+// Pass Props use defaultProps use propTypes
+class CampSite extends React.Component {
+    constructor( props ) {
+        super( props );
+    }
+    render () {
+        return (
+            <div>
+                <Camper />
+            </div>
+        );
+    }
+};
+// Change code below this line
+function Camper ( props ) {
+    return (
+        <div>
+            <p>
+                {props.name}
+            </p>
+        </div>
+    )
+}
+Camper.defaultProps = {
+    name: 'CamperBot'
+}
+Camper.propTypes = {
+    name: PropTypes.string.isRequired
+}
 
