@@ -623,3 +623,19 @@ class RenderInput extends React.Component {
         );
     }
 };
+
+
+// Use the Lifecycle Method componentWillMount
+class MyComponent extends React.Component {
+    constructor( props ) {
+        super( props );
+    }
+    componentWillMount () {
+        // Change code below this line
+        console.log( 'in the componentWillMount' );
+        // Change code above this line
+    }
+    render () {
+        return <div />
+    }
+};
