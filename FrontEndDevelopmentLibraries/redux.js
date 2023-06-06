@@ -48,24 +48,58 @@ const actionCreator = () => action
 
 
 // Handle an Action in the Store
+// const defaultState = {
+//     login: false
+// };
+
+// const reducer = ( state = defaultState, action ) => {
+//     // Change code below this line
+//     if ( action.type === 'LOGIN' ) {
+//         return { login: true }
+//     } else {
+//         return state
+//     }
+//     // Change code above this line
+// };
+
+// const store = Redux.createStore( reducer );
+
+// const loginAction = () => {
+//     return {
+//         type: 'LOGIN'
+//     }
+// };
+// // store.dispatch( loginAction() )
+
+
+// Use a Switch Statement to Handle Multiple Actions
 const defaultState = {
-    login: false
+    authenticated: false
 };
 
-const reducer = ( state = defaultState, action ) => {
+const authReducer = ( state = defaultState, action ) => {
     // Change code below this line
-    if ( action.type === 'LOGIN' ) {
-        return { login: true }
-    } else {
-        return state
+    switch ( action.type ) {
+        case 'LOGIN':
+            return { authenticated: true }
+        case 'LOGOUT':
+            return { authenticated: false }
+        default:
+            return state;
     }
     // Change code above this line
 };
 
-const store = Redux.createStore( reducer );
+const store = Redux.createStore( authReducer );
 
-const loginAction = () => {
+const loginUser = () => {
     return {
         type: 'LOGIN'
+    }
+};
+
+const logoutUser = () => {
+    return {
+        type: 'LOGOUT'
     }
 };
