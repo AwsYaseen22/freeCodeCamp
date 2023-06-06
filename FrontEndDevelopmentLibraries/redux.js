@@ -6,4 +6,13 @@ const reducer = ( state = 5 ) => {
 // Redux methods are available from a Redux object
 // For example: Redux.createStore()
 // Define the store here:
-const store = Redux.createState( reducer )
+// const store = Redux.createState( reducer )
+
+
+// Get State from the Redux Store
+const store = Redux.createStore(
+    ( state = 5 ) => state
+);
+
+// Change code below this line
+const currentState = store.getState()
