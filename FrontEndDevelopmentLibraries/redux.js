@@ -20,4 +20,11 @@ const currentState = store.getState()
 
 // Define a Redux Action
 // Define an action here:
-const action = { type: 'LOGIN' }
+// const action = { type: 'LOGIN' }
+
+
+// Define an Action Creator
+const action = {
+    type: 'LOGIN'
+}
+// Define an action creator here:
