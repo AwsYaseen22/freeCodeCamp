@@ -318,22 +318,58 @@ const actionCreator = () => action
 
 
 // Write a Counter with Redux
-const INCREMENT = 'INCREMENT'; // Define a constant for increment action types
-const DECREMENT = 'DECREMENT'; // Define a constant for decrement action types
+// const INCREMENT = 'INCREMENT'; // Define a constant for increment action types
+// const DECREMENT = 'DECREMENT'; // Define a constant for decrement action types
 
-const counterReducer = ( state = 0, action ) => {
+// const counterReducer = ( state = 0, action ) => {
+//     switch ( action.type ) {
+//         case INCREMENT:
+//             return state + 1
+//         case DECREMENT:
+//             return state - 1
+//         default:
+//             return state;
+//     }
+// }; // Define the counter reducer which will increment or decrement the state based on the action it receives
+
+// const incAction = () => ( { type: INCREMENT } ); // Define an action creator for incrementing
+
+// const decAction = () => ( { type: DECREMENT } ); // Define an action creator for decrementing
+
+// const store = Redux.createStore( counterReducer ); // Define the Redux store here, passing in your reducers
+
+
+
+
+
+
+
+// Never Mutate State
+const ADD_TO_DO = 'ADD_TO_DO';
+
+// A list of strings representing tasks to do:
+const todos = [
+    'Go to the store',
+    'Clean the house',
+    'Cook dinner',
+    'Learn to code',
+];
+
+const immutableReducer = ( state = todos, action ) => {
     switch ( action.type ) {
-        case INCREMENT:
-            return state + 1
-        case DECREMENT:
-            return state - 1
+        case ADD_TO_DO:
+            // Don't mutate state here or the tests will fail
+            return [...todos, action.todo]
         default:
             return state;
     }
-}; // Define the counter reducer which will increment or decrement the state based on the action it receives
+};
 
-const incAction = () => ( { type: INCREMENT } ); // Define an action creator for incrementing
+const addToDo = ( todo ) => {
+    return {
+        type: ADD_TO_DO,
+        todo
+    }
+}
 
-const decAction = () => ( { type: DECREMENT } ); // Define an action creator for decrementing
-
-const store = Redux.createStore( counterReducer ); // Define the Redux store here, passing in your reducers
+const store = Redux.createStore( immutableReducer );
