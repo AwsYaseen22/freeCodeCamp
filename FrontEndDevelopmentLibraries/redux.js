@@ -15,7 +15,7 @@
 // );
 
 // Change code below this line
-const currentState = store.getState()
+// const currentState = store.getState()
 
 
 // Define a Redux Action
@@ -24,11 +24,11 @@ const currentState = store.getState()
 
 
 // Define an Action Creator
-const action = {
-    type: 'LOGIN'
-}
-// Define an action creator here:
-const actionCreator = () => action
+// const action = {
+//     type: 'LOGIN'
+// }
+// // Define an action creator here:
+// const actionCreator = () => action
 
 
 // Dispatch an Action Event
