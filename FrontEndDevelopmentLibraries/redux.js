@@ -381,20 +381,47 @@ const actionCreator = () => action
 
 
 // Use the Spread Operator on Arrays
-const immutableReducer = ( state = ['Do not mutate state!'], action ) => {
+// const immutableReducer = ( state = ['Do not mutate state!'], action ) => {
+//     switch ( action.type ) {
+//         case 'ADD_TO_DO':
+//             // Don't mutate state here or the tests will fail
+//             return [...state, action.todo]
+//         default:
+//             return state;
+//     }
+// };
+
+// const addToDo = ( todo ) => {
+//     return {
+//         type: 'ADD_TO_DO',
+//         todo
+//     }
+// }
+
+// const store = Redux.createStore( immutableReducer );
+
+
+
+
+
+
+
+
+// Remove an Item from an Array
+const immutableReducer = ( state = [0, 1, 2, 3, 4, 5], action ) => {
     switch ( action.type ) {
-        case 'ADD_TO_DO':
+        case 'REMOVE_ITEM':
             // Don't mutate state here or the tests will fail
-            return [...state, action.todo]
+            return state.slice( 0, action.index ).concat( state.slice( action.index + 1 ) )
         default:
             return state;
     }
 };
 
-const addToDo = ( todo ) => {
+const removeItem = ( index ) => {
     return {
-        type: 'ADD_TO_DO',
-        todo
+        type: 'REMOVE_ITEM',
+        index
     }
 }
 
