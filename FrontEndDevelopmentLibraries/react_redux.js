@@ -178,7 +178,26 @@
 
 
 // Map State to Props
-const state = [];
+// const state = [];
+
+// // Change code below this line
+// const mapStateToProps = ( state ) => ( { messages: state } )
+
+
+
+
+
+// Map Dispatch to Props
+const addMessage = ( message ) => {
+    return {
+        type: 'ADD',
+        message: message
+    }
+};
 
 // Change code below this line
-const mapStateToProps = ( state ) => ( { messages: state } )
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+        submitNewMessage: ( message ) => dispatch( addMessage( message ) )
+    }
+}
