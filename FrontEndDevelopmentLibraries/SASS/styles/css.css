@@ -1,18 +1,21 @@
-.blue-bg {
-  background-color: blue;
+.text-1 {
+  font-size: 15px;
 }
 
-.black-bg {
-  background-color: black;
+.text-2 {
+  font-size: 30px;
 }
 
-.red-bg {
-  background-color: red;
+.text-3 {
+  font-size: 45px;
 }
 
-div {
-  height: 200px;
-  width: 200px;
+.text-4 {
+  font-size: 60px;
+}
+
+.text-5 {
+  font-size: 75px;
 }
 
 /*# sourceMappingURL=css.css.map */

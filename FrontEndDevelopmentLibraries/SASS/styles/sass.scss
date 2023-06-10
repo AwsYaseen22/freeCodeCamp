@@ -72,11 +72,20 @@
 
 
 
-// Use @each to Map Over Items in a List
-@each $color in blue,black,red{
-    .#{$color}-bg {background-color: $color}
-}
-div {
-    height: 200px;
-    width: 200px;
+// // Use @each to Map Over Items in a List
+// @each $color in blue,black,red{
+//     .#{$color}-bg {background-color: $color}
+// }
+// div {
+//     height: 200px;
+//     width: 200px;
+// }
+
+
+
+// Apply a Style Until a Condition is Met with @while
+$x: 1;
+@while $x < 6{
+    .text#{-$x} {font-size: 15px * $x;}
+    $x: $x + 1;
 }
