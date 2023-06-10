@@ -1,7 +1,20 @@
-$text-color: red;
-            .header{
-                text-align: center;
-            }
-            .blog-post, h2 {
-                color: $text-color;
-            }
+// $text-color: red;
+//             .header{
+//                 text-align: center;
+//             }
+//             .blog-post, h2 {
+//                 color: $text-color;
+//             }
+
+
+
+.blog-post {
+    h1 {
+        text-align: center;
+        color: blue;
+    }
+    p {
+        font-size: 20px;
+    }
+}
+
