@@ -91,8 +91,26 @@
 // }
 
 
-// Split Your Styles into Smaller Chunks with Partials
-@import 'variables';
-.partial {
-    color: $blue-color;
+// // Split Your Styles into Smaller Chunks with Partials
+// @import 'variables';
+// .partial {
+//     color: $blue-color;
+// }
+
+
+
+// Extend One Set of CSS Styles to Another Element
+h3 {
+    text-align: center;
+}
+
+.info {
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.info-important{
+    @extend .info;
+    background-color: magenta;
 }
