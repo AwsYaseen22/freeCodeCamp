@@ -18,6 +18,8 @@ function App () {
   }
 
   const [display, setDisplay] = useState( '...' )
+  const [volume, setVolume] = useState( { volume: 0.5, input: 50 } )
+
 
   useEffect( () => {
     function handleKeyDown ( e ) {
@@ -43,20 +45,17 @@ function App () {
     }, 150 );
     setDisplay( item.display )
     let audio = document.getElementById( item.key )
+    audio.volume = volume.volume
     audio.play()
 
   }
 
-  // const changeVolume = ( e ) => {
-  //   const volume = e.target.value / 100;
-  //   const message = "Volume: " + e.target.value;
-  //   console.log( message );
-  //   // this.setState( {
-  //   //   volume: volume,
-  //   //   volumeInput: e.target.value,
-  //   //   currentSound: message
-  //   // } )
-  // }
+  const changeVolume = ( e ) => {
+    const volume = e.target.value / 100;
+    const message = "Volume: " + e.target.value;
+    setVolume( { volume: volume, input: e.target.value } )
+    setDisplay( message )
+  }
 
   return (
     <div className="App" id="drum-machine">
@@ -72,12 +71,12 @@ function App () {
       <div className="settings">
         <div className="innerSettings">
           <h2 id='display'>{display}</h2>
-          {/* <input value='50'
+          <input value={volume.input}
             type="range"
             min="1"
             max="100"
             onChange={changeVolume}>
-          </input> */}
+          </input>
         </div>
       </div>
     </div>
