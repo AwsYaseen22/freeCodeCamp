@@ -44,21 +44,31 @@ body{
 }
 
 .settings{
-  background-color: blue;
+  /* background-color: blue; */
   width: 40%;
   height: 100%;
 }
 
+
+
 .innerSettings{
-  background-color: orange;
+  /* background-color: orange; */
   width: auto;
   height: 100%;
   margin: 10px;
+  padding: 10px;
+}
+
+#display{
+  margin: 10px auto;
+  background-color: gray;
+  width: 80%;
+  padding: 10px 5px 10px 5px;
 }
 
 @media all and (max-width: 700px) {
   .App{
-    width: 70%;
+    width: 90%;
     flex-direction: column;
   }
   .keys{
