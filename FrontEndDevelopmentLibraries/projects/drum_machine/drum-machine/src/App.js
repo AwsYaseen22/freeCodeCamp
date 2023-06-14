@@ -45,7 +45,7 @@ function App () {
   }
 
   return (
-    <div className="App">
+    <div className="App" id="drum-machine">
       <div className="keys">
         {keys.map( ( d, i ) => <div key={i} className='key' id={`key${i}`} onClick={( e ) => handlPress( d )} style={{ userSelect: 'none' }}>{d.toUpperCase()}</div> )}
       </div>

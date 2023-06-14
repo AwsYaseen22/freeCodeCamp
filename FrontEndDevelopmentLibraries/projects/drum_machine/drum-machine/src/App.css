@@ -5,7 +5,7 @@ body{
 .App {
   text-align: center;
   display: flex;
-  width: 40%;
+  width: 700px;
   background-color: rgb(184, 184, 184);
   margin: 100px auto;
   border: 5px solid orange;
@@ -56,7 +56,7 @@ body{
   margin: 10px;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 700px) {
   .App{
     width: 70%;
     flex-direction: column;
