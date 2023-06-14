@@ -22,7 +22,7 @@ function App () {
   useEffect( () => {
     function handleKeyDown ( e ) {
       if ( [81, 87, 69, 65, 83, 68, 90, 88, 67].includes( e.keyCode ) ) {
-        handlPress( obj[e.key].key )
+        handlPress( obj[e.key.toLowerCase()].key )
       }
     }
     document.addEventListener( 'keydown', handleKeyDown );
@@ -42,18 +42,42 @@ function App () {
       e.classList.toggle( 'keyPressed' )
     }, 150 );
     setDisplay( item.display )
-    new Audio( obj[key].link ).play();
+    let audio = document.getElementById( item.key )
+    audio.play()
 
   }
+
+  // const changeVolume = ( e ) => {
+  //   const volume = e.target.value / 100;
+  //   const message = "Volume: " + e.target.value;
+  //   console.log( message );
+  //   // this.setState( {
+  //   //   volume: volume,
+  //   //   volumeInput: e.target.value,
+  //   //   currentSound: message
+  //   // } )
+  // }
 
   return (
     <div className="App" id="drum-machine">
       <div className="keys">
-        {keys.map( ( d, i ) => <div key={i} className='key' id={`key${i}`} onClick={( e ) => handlPress( d )} style={{ userSelect: 'none' }}>{d.toUpperCase()}</div> )}
+        {keys.map( ( d, i ) => (
+          <div key={i} className='drum-pad' id={`key${i}`} onClick={( e ) => handlPress( d )} style={{ userSelect: 'none' }}>
+            {d.toUpperCase()}
+            <audio className="clip" id={d.toUpperCase()} src={obj[d].link}></audio>
+          </div>
+        )
+        )}
       </div>
       <div className="settings">
         <div className="innerSettings">
           <h2 id='display'>{display}</h2>
+          {/* <input value='50'
+            type="range"
+            min="1"
+            max="100"
+            onChange={changeVolume}>
+          </input> */}
         </div>
       </div>
     </div>
