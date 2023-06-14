@@ -9,7 +9,6 @@ body{
   background-color: rgb(184, 184, 184);
   margin: 100px auto;
   border: 5px solid orange;
-  /* padding: 10px 20px; */
   height: auto;
 }
 
@@ -17,8 +16,6 @@ body{
   background-color: red;
   width: 60%;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
   flex-flow: row wrap;
   justify-content: space-around;
   align-self: center;
@@ -29,15 +26,26 @@ body{
 .key{
   width: 30%;
   height: 30%;
-  background-color: green;
   gap: 5px;
-  /* margin: 5px; */
+  box-shadow: black 3px 3px 5px;
+  background-color: gray;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.keyPressed{
+  background-color: orange;
+  box-shadow: black 0 0 0;
 }
 
 .settings{
   background-color: blue;
   width: 40%;
-  /* padding: 5px; */
   height: 100%;
 }
 
