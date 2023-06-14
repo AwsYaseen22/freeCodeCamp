@@ -43,6 +43,10 @@ body{
   box-shadow: black 0 0 0;
 }
 
+.keyPressedOff{
+  box-shadow: black 0 0 0;
+}
+
 .settings{
   /* background-color: blue; */
   width: 40%;
@@ -64,6 +68,12 @@ body{
   background-color: gray;
   width: 80%;
   padding: 10px 5px 10px 5px;
+}
+
+.power-button{
+  width: 50px;
+  height: 25px;
+  cursor: pointer;
 }
 
 @media all and (max-width: 700px) {

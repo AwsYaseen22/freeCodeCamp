@@ -17,7 +17,8 @@ function App () {
     x: { key: 'X', link: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3', display: 'Closed HH', selected: false, index: 7 },
   }
 
-  const [display, setDisplay] = useState( '...' )
+  const [power, setPower] = useState( true )
+  const [display, setDisplay] = useState( 'Welcome' )
   const [volume, setVolume] = useState( { volume: 0.5, input: 50 } )
 
 
@@ -36,17 +37,29 @@ function App () {
   }, [] );
 
   const handlPress = ( key ) => {
-    key = key.toLowerCase()
-    let item = obj[key]
-    let e = document.getElementById( `key${item.index}` )
-    e.classList.toggle( 'keyPressed' )
-    setTimeout( () => {
+    if ( power ) {
+      key = key.toLowerCase()
+      let item = obj[key]
+      let e = document.getElementById( `key${item.index}` )
       e.classList.toggle( 'keyPressed' )
-    }, 150 );
-    setDisplay( item.display )
-    let audio = document.getElementById( item.key )
-    audio.volume = volume.volume
-    audio.play()
+      setTimeout( () => {
+        e.classList.toggle( 'keyPressed' )
+      }, 150 );
+      setDisplay( item.display )
+      let audio = document.getElementById( item.key )
+      audio.volume = volume.volume
+      audio.currentTime = 0
+      audio.play()
+    } else {
+      key = key.toLowerCase()
+      let item = obj[key]
+      let e = document.getElementById( `key${item.index}` )
+      e.classList.toggle( 'keyPressedOff' )
+      setTimeout( () => {
+        e.classList.toggle( 'keyPressedOff' )
+      }, 150 );
+    }
+
 
   }
 
@@ -55,6 +68,11 @@ function App () {
     const message = "Volume: " + e.target.value;
     setVolume( { volume: volume, input: e.target.value } )
     setDisplay( message )
+  }
+
+  const togglePower = () => {
+    setPower( !power )
+
   }
 
   return (
@@ -71,6 +89,13 @@ function App () {
       <div className="settings">
         <div className="innerSettings">
           <h2 id='display'>{display}</h2>
+          <br />
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 10, alignItems: "center" }}>
+            <button className='power-button' onClick={togglePower} style={power ? { backgroundColor: 'green' } : { backgroundColor: 'tomato' }} ></button>
+            <h3>Power {power ? 'on' : 'off'}</h3>
+
+          </div>
+          <br />
           <input value={volume.input}
             type="range"
             min="1"
@@ -79,7 +104,7 @@ function App () {
           </input>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
