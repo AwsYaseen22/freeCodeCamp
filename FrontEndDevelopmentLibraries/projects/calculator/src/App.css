@@ -1,38 +1,144 @@
+body {
+  background-color: gray;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  width: 350px;
+  /* background-color: rgb(184, 184, 184); */
+  margin: 100px auto;
+  border: 20px solid orange;
+  height: auto;
+  border-radius: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.calculator{
+  background-color: orange;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.formulaScreen{
+  /* background-color: rgb(80, 80, 80);
+  height: 50px;
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  color: rgb(191, 191, 191); */
+  height: 80px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: rgb(157, 157, 157);
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px 5px rgb(54, 54, 54) inset;
+    box-shadow: 0px 0px 5px 5px rgb(53, 53, 53) inset;
+}
+.outputScreen{
+  height: 80px;
+  /* width: 100%; */
+  padding-right: 10px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: rgb(157, 157, 157);
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 5px 5px rgb(54, 54, 54) inset;
+  box-shadow: 0px 0px 5px 5px rgb(53, 53, 53) inset;
+  /* border: 5px solid green; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.keys {
+  background-color: red;
+  width: 100%;
+}
+
+.rows{
+  background-color: orange;
+  width: 100%;
+  display: flex;
+}
+
+
+.row1{
+  background-color: orange;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+#clear {
+  background: rgb(172, 57, 57);
+  width: 50%;
+}
+#divide {
+  background: rgb(102, 102, 102);
+  width: 25%;
+}
+#multiply {
+  background: rgb(102, 102, 102);
+  width: 25%;
+}
+
+.r4-left{
+  width: 75%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.r4-1{
+  display: flex;
+}
+.r4-2{
+  display: flex;
+  justify-content: end;
+}
+
+#zero{
+  width: 66.666%;
+}
+
+
+.r4-right{
+  width: 25%
+}
+#equals {
+  background: rgb(0, 68, 102);
+  height: 93%;
+  width: 90%;
+}
+
+
+button {
+  width: 33.333%;
+  height: 75px;
+  /* height: 30%; */
+  /* box-shadow: black 3px 3px 5px; */
+  background-color: rgb(53, 53, 53);
+  border-radius: 10px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  margin: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+
+#subtract{
+  background: rgb(102, 102, 102);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#add{
+  background: rgb(102, 102, 102);
 }
+
+
