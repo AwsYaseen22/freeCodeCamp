@@ -61,6 +61,11 @@ function App () {
       if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 1] ) ) {
         if ( ['+', '/', 'x'].includes( key ) ) {
           setFormula( formula.slice( 0, formula.length - 1 ) + key )
+          if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 3] ) ) {
+            setFormula( formula.slice( 0, formula.length - 3 ) + key )
+
+          }
+          console.log( 'after setformujla' );
         } else {
           if ( formula[formula.length - 2] !== '-' ) {
             setFormula( formula + ' ' + key )
