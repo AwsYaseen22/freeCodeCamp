@@ -15,10 +15,14 @@ function App () {
     //     setScreen( temp )
     //   }, 1500 );
     // } else
+    console.log( 'out', { lastRes }, { formula }, { screen }, { key } )
+
     if ( /[0-9]/.test( key ) && lastRes ) {
       // if ( lastRes ) {
       setLastRes( false )
       setFormula( key )
+      setScreen( key )
+      console.log( 'in', { lastRes }, { formula }, { screen }, { key } )
       // console.log( 'here', { lastRes } );
       // }
       // console.log( { lastRes }, { formula } );
@@ -26,53 +30,60 @@ function App () {
 
       // }
       // console.log( 'equals' );
-    }
-    if ( /[1-9]/.test( key ) && screen.length < 25 ) {
-      // if ( lastRes.length ) {
-      //   console.log( { lastRes } );
-      //   setFormula( '' )
-      //   setLastRes( '' )
-      // }
-      if ( ['0', '+', '-', '/', 'x'].includes( screen ) ) {
-        setScreen( key )
-        setFormula( formula + ' ' + key )
-      } else {
-        setScreen( screen + key )
-        setFormula( formula + key )
-      }
-    } else if ( key === '0' && screen.length < 25 ) {
-      if ( screen !== '0' && formula !== '0' ) {
-        setScreen( screen + '0' )
-        setFormula( formula + '0' )
-      }
-    } else if ( key === '.' && screen.length < 25 ) {
-      if ( screen.indexOf( '.' ) === -1 ) {
-        setScreen( screen + '.' )
-      }
-      let lastSpace = formula.lastIndexOf( ' ' )
-      let lastNum = formula.slice( lastSpace )
-      // console.log( { lastNum } );
-      if ( lastNum.indexOf( '.' ) === -1 ) {
-        setFormula( formula + '.' )
-      }
-    } else if ( ['+', '/', 'x', '-'].includes( key ) ) {
+    } else if ( /[+-x/]/.test( key ) && lastRes ) {
+      setFormula( formula + ' ' + key )
+      setLastRes( false )
       setScreen( key )
-      // console.log( { formula } );
-      if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 1] ) ) {
-        if ( ['+', '/', 'x'].includes( key ) ) {
-          setFormula( formula.slice( 0, formula.length - 1 ) + key )
-          if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 3] ) ) {
-            setFormula( formula.slice( 0, formula.length - 3 ) + key )
+    } else {
 
-          }
-          console.log( 'after setformujla' );
+      if ( /[1-9]/.test( key ) && screen.length < 25 ) {
+        // if ( lastRes.length ) {
+        //   console.log( { lastRes } );
+        //   setFormula( '' )
+        //   setLastRes( '' )
+        // }
+        if ( ['0', '+', '-', '/', 'x'].includes( screen ) ) {
+          setScreen( key )
+          setFormula( formula + ' ' + key )
         } else {
-          if ( formula[formula.length - 2] !== '-' ) {
-            setFormula( formula + ' ' + key )
-          }
+          setScreen( screen + key )
+          setFormula( formula + key )
         }
-      } else {
-        setFormula( formula + ' ' + key )
+      } else if ( key === '0' && screen.length < 25 ) {
+        if ( screen !== '0' && formula !== '0' ) {
+          setScreen( screen + '0' )
+          setFormula( formula + '0' )
+          console.log( 'add aero ', { formula } );
+        }
+      } else if ( key === '.' && screen.length < 25 ) {
+        if ( screen.indexOf( '.' ) === -1 ) {
+          setScreen( screen + '.' )
+        }
+        let lastSpace = formula.lastIndexOf( ' ' )
+        let lastNum = formula.slice( lastSpace )
+        // console.log( { lastNum } );
+        if ( lastNum.indexOf( '.' ) === -1 ) {
+          setFormula( formula + '.' )
+        }
+      } else if ( ['+', '/', 'x', '-'].includes( key ) ) {
+        setScreen( key )
+        // console.log( { formula } );
+        if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 1] ) ) {
+          if ( ['+', '/', 'x'].includes( key ) ) {
+            setFormula( formula.slice( 0, formula.length - 1 ) + key )
+            if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 3] ) ) {
+              setFormula( formula.slice( 0, formula.length - 3 ) + key )
+
+            }
+            console.log( 'after setformujla' );
+          } else {
+            if ( formula[formula.length - 2] !== '-' ) {
+              setFormula( formula + ' ' + key )
+            }
+          }
+        } else {
+          setFormula( formula + ' ' + key )
+        }
       }
     }
     // setFormula( formula + ( key === 'x' ? '*' : key ) )
