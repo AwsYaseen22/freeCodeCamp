@@ -4,39 +4,90 @@ import { useState } from "react";
 function App () {
   const [screen, setScreen] = useState( '0' )
   const [formula, setFormula] = useState( '' )
+  const [lastRes, setLastRes] = useState( false )
 
   const handleClick = ( e ) => {
-    console.log( e.target.value );
-    if ( screen.length === 25 ) {
-      const temp = screen
-      setScreen( 'too much' )
-      setTimeout( () => {
-        setScreen( temp )
-      }, 1000 );
-    } else if ( /[1-9]/.test( e.target.value ) && screen !== 'too much' ) {
-      setScreen( screen === '0' ? e.target.value : screen + e.target.value )
-    } else if ( e.target.value === '0' && screen !== 'too much' ) {
-      if ( screen !== '0' ) {
-        setScreen( screen + '0' )
+    let key = e.target.value
+    // if ( screen.length === 25 ) {
+    //   const temp = screen
+    //   setScreen( 'too much' )
+    //   setTimeout( () => {
+    //     setScreen( temp )
+    //   }, 1500 );
+    // } else
+    if ( /[0-9]/.test( key ) && lastRes ) {
+      // if ( lastRes ) {
+      setLastRes( false )
+      setFormula( key )
+      // console.log( 'here', { lastRes } );
+      // }
+      // console.log( { lastRes }, { formula } );
+      // if (  lastRes == formula && lastRes !== '' ){
+
+      // }
+      // console.log( 'equals' );
+    }
+    if ( /[1-9]/.test( key ) && screen.length < 25 ) {
+      // if ( lastRes.length ) {
+      //   console.log( { lastRes } );
+      //   setFormula( '' )
+      //   setLastRes( '' )
+      // }
+      if ( ['0', '+', '-', '/', 'x'].includes( screen ) ) {
+        setScreen( key )
+        setFormula( formula + ' ' + key )
+      } else {
+        setScreen( screen + key )
+        setFormula( formula + key )
       }
-    } else if ( e.target.value === '.' && screen !== 'too much' ) {
+    } else if ( key === '0' && screen.length < 25 ) {
+      if ( screen !== '0' && formula !== '0' ) {
+        setScreen( screen + '0' )
+        setFormula( formula + '0' )
+      }
+    } else if ( key === '.' && screen.length < 25 ) {
       if ( screen.indexOf( '.' ) === -1 ) {
         setScreen( screen + '.' )
       }
+      let lastSpace = formula.lastIndexOf( ' ' )
+      let lastNum = formula.slice( lastSpace )
+      // console.log( { lastNum } );
+      if ( lastNum.indexOf( '.' ) === -1 ) {
+        setFormula( formula + '.' )
+      }
+    } else if ( ['+', '/', 'x', '-'].includes( key ) ) {
+      setScreen( key )
+      // console.log( { formula } );
+      if ( ['+', '/', 'x', '-'].includes( formula[formula.length - 1] ) ) {
+        if ( ['+', '/', 'x'].includes( key ) ) {
+          setFormula( formula.slice( 0, formula.length - 1 ) + key )
+        } else {
+          if ( formula[formula.length - 2] !== '-' ) {
+            setFormula( formula + ' ' + key )
+          }
+        }
+      } else {
+        setFormula( formula + ' ' + key )
+      }
     }
-    // setScreen( e.target.value )
-    setFormula( formula + e.target.value )
+    // setFormula( formula + ( key === 'x' ? '*' : key ) )
   }
 
   const equal = () => {
-    let res = eval( formula )
-    setScreen( res )
-    setFormula( res )
+    let f = formula.replaceAll( 'x', '*' )
+    if ( /[0-9]/.test( f ) ) {
+      // console.log( eval( f ) );
+      let res = eval( f )
+      setScreen( res )
+      setFormula( res )
+      setLastRes( true )
+    }
   }
 
-  const clear = () => {
+  const clearScreen = () => {
     setScreen( '0' )
     setFormula( '' )
+    setLastRes( '' )
   }
 
   return (
@@ -48,7 +99,7 @@ function App () {
 
         <div className='keys'>
           <div className='row1'>
-            <button id="clear" value="AC" onClick={clear}>AC</button>
+            <button id="clear" value="AC" onClick={clearScreen}>AC</button>
             <button id="divide" value="/" onClick={handleClick}>/</button>
             <button id="multiply" value="x" onClick={handleClick} >x</button>
           </div>
@@ -56,7 +107,7 @@ function App () {
             <button id="seven" value="7" onClick={handleClick}>7</button>
             <button id="eight" value="8" onClick={handleClick}>8</button>
             <button id="nine" value="9" onClick={handleClick}>9</button>
-            <button id="subtract" value="‑" onClick={handleClick}>‑</button>
+            <button id="subtract" value="-" onClick={handleClick}>-</button>
           </div>
           <div className='rows'>
             <button id="four" value="4" onClick={handleClick}>4</button>
