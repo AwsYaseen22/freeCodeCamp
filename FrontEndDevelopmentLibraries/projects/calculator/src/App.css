@@ -6,7 +6,6 @@ body {
   text-align: center;
   display: flex;
   width: 400px;
-  /* background-color: rgb(184, 184, 184); */
   margin: 100px auto;
   border: 20px solid orange;
   height: auto;
@@ -19,14 +18,6 @@ body {
 }
 
 .formulaScreen{
-  /* background-color: rgb(80, 80, 80);
-  height: 50px;
-  width: 100%;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  color: rgb(191, 191, 191); */
   font-family: 'Share Tech Mono', monospace;
   height: 80px;
   font-size: 20px;
@@ -37,6 +28,7 @@ body {
   margin-bottom: 20px;
   box-shadow: 5px 5px 5px 5px rgb(54, 54, 54) inset;
   box-shadow: 0px 0px 5px 5px rgb(53, 53, 53) inset;
+  overflow-y: auto;
 }
 .outputScreen{
   font-family: 'Share Tech Mono', monospace;
@@ -50,7 +42,6 @@ body {
   margin-bottom: 20px;
   box-shadow: 5px 5px 5px 5px rgb(54, 54, 54) inset;
   box-shadow: 0px 0px 5px 5px rgb(53, 53, 53) inset;
-  /* border: 5px solid green; */
 }
 
 
@@ -118,8 +109,6 @@ button {
   font-family: 'Share Tech Mono', monospace;
   width: 33.333%;
   height: 75px;
-  /* height: 30%; */
-  /* box-shadow: black 3px 3px 5px; */
   background-color: rgb(53, 53, 53);
   border-radius: 10px;
   display: flex;

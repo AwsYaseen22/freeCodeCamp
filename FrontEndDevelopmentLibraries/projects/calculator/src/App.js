@@ -8,28 +8,15 @@ function App () {
 
   const handleClick = ( e ) => {
     let key = e.target.value
-    // if ( screen.length === 25 ) {
-    //   const temp = screen
-    //   setScreen( 'too much' )
-    //   setTimeout( () => {
-    //     setScreen( temp )
-    //   }, 1500 );
-    // } else
-    console.log( 'out', { lastRes }, { formula }, { screen }, { key } )
+
+    // console.log( 'out', { lastRes }, { formula }, { screen }, { key } )
 
     if ( /[0-9]/.test( key ) && lastRes ) {
-      // if ( lastRes ) {
       setLastRes( false )
       setFormula( key )
       setScreen( key )
-      console.log( 'in', { lastRes }, { formula }, { screen }, { key } )
-      // console.log( 'here', { lastRes } );
-      // }
-      // console.log( { lastRes }, { formula } );
-      // if (  lastRes == formula && lastRes !== '' ){
+      // console.log( 'in', { lastRes }, { formula }, { screen }, { key } )
 
-      // }
-      // console.log( 'equals' );
     } else if ( /[+-x/]/.test( key ) && lastRes ) {
       setFormula( formula + ' ' + key )
       setLastRes( false )
@@ -37,11 +24,7 @@ function App () {
     } else {
 
       if ( /[1-9]/.test( key ) && screen.length < 25 ) {
-        // if ( lastRes.length ) {
-        //   console.log( { lastRes } );
-        //   setFormula( '' )
-        //   setLastRes( '' )
-        // }
+
         if ( ['0', '+', '-', '/', 'x'].includes( screen ) ) {
           setScreen( key )
           setFormula( formula + ' ' + key )
@@ -53,7 +36,7 @@ function App () {
         if ( screen !== '0' && formula !== '0' ) {
           setScreen( screen + '0' )
           setFormula( formula + '0' )
-          console.log( 'add aero ', { formula } );
+          // console.log( 'add zero ', { formula } );
         }
       } else if ( key === '.' && screen.length < 25 ) {
         if ( screen.indexOf( '.' ) === -1 ) {
