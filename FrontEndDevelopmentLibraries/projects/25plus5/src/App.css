@@ -1,0 +1,122 @@
+body {
+  background-color: gray;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 100px auto;
+  border: 5px solid orange;
+  height: auto;
+  border-radius: 10px;
+  background-color: rgba(212, 173, 100, 0.495);
+}
+
+.main-title{
+  width: 100%;
+  /* background-color: red; */
+}
+
+.container{
+  /* background-color: yellowgreen; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.middle{
+  width: 100%;
+  display: flex;
+}
+
+.settings{
+  width: 40%;
+  /* background-color: green; */
+  display: flex;
+  flex-direction: column;
+}
+
+.length-control{
+  background-color: rgba(247, 247, 247, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin: 5px 10px;
+  padding: 0px 5px 10px 0px;
+  border-radius: 10px;
+}
+
+.length-control h4{
+  margin: 7px;
+}
+
+.control{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid rgba(0, 128, 0, 0.607);
+  border-radius: 50px;
+  align-self: center;
+  background-color: lightgray;
+}
+.controler{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid rgba(0, 128, 0, 0.607);
+  border-radius: 50px;
+  align-self: center;
+  background-color: lightgray;
+  padding: 5px 5px;
+}
+.control h3 {
+  background-color: green;
+  margin: 10px;
+  align-self: baseline;
+}
+
+.timer-wrapper{
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  height: 96%;
+  justify-content: center;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+.timer{
+  width: 60%;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timer-control{
+  width: 100%;
+  background-color: yellow;
+}
+
+
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.decrease{
+  color: rgb(218, 62, 35);
+}
+.increase{
+  color: rgb(34, 132, 4);
+}
+#timer-label{
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+#time-left {
+  font-size: 4rem;
+  font-weight: bold;
+}
