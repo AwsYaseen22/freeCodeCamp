@@ -4,10 +4,20 @@ import './App.css';
 
 function App () {
   const [state, setState] = useState( { break: 5, session: 25, playing: false } )
-  // const [playing, setPlaying] = useState( false )
 
   const playPause = () => {
     setState( { ...state, playing: !state.playing } )
+  }
+
+  const increase = ( item ) => {
+    if ( state[item] < 60 ) {
+      setState( { ...state, [item]: state[item] + 1 } )
+    }
+  }
+  const decrease = ( item ) => {
+    if ( state[item] > 1 ) {
+      setState( { ...state, [item]: state[item] - 1 } )
+    }
   }
 
   const reset = () => {
@@ -44,15 +54,15 @@ function App () {
                 </h4>
               </div>
               <div className='control'>
-                <button className="btn-level" id="break-decrement" value="-">
+                <button className="btn-level" id="break-decrement" value="-" onClick={() => decrease( 'break' )}>
                   <i className="fa fa-circle-minus fa-2x decrease"></i>
                 </button>
                 <div className="btn-level" id="break-length">
                   <h4>
-                    5
+                    {String( state.break )}
                   </h4>
                 </div>
-                <button className="btn-level" id="break-increment" value="+">
+                <button className="btn-level" id="break-increment" value="+" onClick={() => increase( 'break' )}>
                   <i className="fa fa-circle-plus fa-2x increase"></i>
                 </button>
 
@@ -65,15 +75,15 @@ function App () {
                 </h4>
               </div>
               <div className='control'>
-                <button className="btn-level" id="break-decrement" value="-">
+                <button className="btn-level" id="break-decrement" value="-" onClick={() => decrease( 'session' )}>
                   <i className="fa fa-circle-minus fa-2x decrease"></i>
                 </button>
                 <div className="btn-level" id="break-length">
                   <h4>
-                    25
+                    {state.session}
                   </h4>
                 </div>
-                <button className="btn-level" id="break-increment" value="+">
+                <button className="btn-level" id="break-increment" value="+" onClick={() => increase( 'session' )}>
                   <i className="fa fa-circle-plus fa-2x increase"></i>
                 </button>
 
