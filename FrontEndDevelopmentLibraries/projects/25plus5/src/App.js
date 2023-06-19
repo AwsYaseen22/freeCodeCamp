@@ -4,11 +4,10 @@ import './App.css';
 
 function App () {
 
-  const [breakTime, setBreakTime] = useState( 1 )
-  const [session, setSession] = useState( 1 )
+  const [breakTime, setBreakTime] = useState( 5 )
+  const [session, setSession] = useState( 25 )
   const [playing, setPlaying] = useState( false )
   const [inSession, setInSession] = useState( true )
-  const [inBreak, setInBreak] = useState( false )
   const [currentMin, setCurrentMin] = useState( session )
   const [currentSec, setCurrentSec] = useState( 0 )
 
@@ -24,7 +23,20 @@ function App () {
       } else if ( currentSec > 0 ) {
         setCurrentSec( currentSec - 1 )
       } else if ( currentSec === 0 && currentMin === 0 ) {
+        const sound = document.getElementById( 'beep' )
+        sound.play()
         setPlaying( false )
+        setTimeout( () => {
+          if ( inSession ) {
+            setInSession( false )
+            setCurrentMin( breakTime )
+          } else {
+            setInSession( true )
+            setCurrentMin( session )
+          }
+          setPlaying( true )
+
+        }, 4000 );
       }
     }
     if ( playing ) {
@@ -36,7 +48,7 @@ function App () {
     }
 
     return () => clearInterval( intervalRef.current );
-  }, [currentMin, currentSec, playing] );
+  }, [breakTime, currentMin, currentSec, inSession, playing, session] );
 
   const handleStart = () => {
     setPlaying( true );
@@ -45,8 +57,6 @@ function App () {
   const handlePause = () => {
     setPlaying( false );
   };
-
-
 
 
   const increaseSession = () => {
@@ -73,17 +83,13 @@ function App () {
   }
 
 
-
-
-
   const reset = () => {
-    setBreakTime( 1 )
-    setSession( 1 )
+    setBreakTime( 5 )
+    setSession( 25 )
     setPlaying( false )
-    setCurrentMin( 1 )
+    setCurrentMin( 25 )
     setCurrentSec( 0 )
     setInSession( true )
-    setInBreak( false )
   }
 
   return (
@@ -98,7 +104,7 @@ function App () {
               <div id="timer-label">
                 {inSession ? 'Session' : 'Break'}
               </div>
-              <div id="time-left">
+              <div id="time-left" className={playing ? inSession ? 'in-session' : 'in-break' : ''}>
                 <p className='minSection'>{String( currentMin ).padStart( 2, '0' )}</p>
                 <p className='time-separator'>:</p>
                 <p className='secSection'>{String( currentSec ).padStart( 2, '0' )}</p>

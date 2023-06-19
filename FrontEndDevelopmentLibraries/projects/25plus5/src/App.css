@@ -130,3 +130,10 @@ button{
 .time-separator{
   width: 15px;
 }
+
+.in-session{
+  color: darkred;
+}
+.in-break{
+  color: green;
+}
