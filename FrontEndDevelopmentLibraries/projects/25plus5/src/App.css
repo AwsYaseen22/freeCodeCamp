@@ -103,6 +103,20 @@ button{
   border: none;
   cursor: pointer;
 }
+.disabled-section{
+    /* background-color: white; */
+    filter: alpha(opacity=50);
+    opacity: 0.6;
+    z-index: 20;
+    /* height: 100%;
+    width: 100%; */
+    /* -moz-opacity: 0.50;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0px;
+    left: 0px; */
+  }
 .decrease{
   color: rgb(218, 62, 35);
 }

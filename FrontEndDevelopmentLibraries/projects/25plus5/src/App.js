@@ -14,6 +14,7 @@ function App () {
 
 
   const intervalRef = useRef( null );
+  const sound = document.getElementById( 'beep' )
 
   useEffect( () => {
     const calculateTimeLeft = () => {
@@ -23,7 +24,6 @@ function App () {
       } else if ( currentSec > 0 ) {
         setCurrentSec( currentSec - 1 )
       } else if ( currentSec === 0 && currentMin === 0 ) {
-        const sound = document.getElementById( 'beep' )
         sound.play()
         setPlaying( false )
         setTimeout( () => {
@@ -60,24 +60,24 @@ function App () {
 
 
   const increaseSession = () => {
-    if ( session < 60 ) {
+    if ( !playing && session < 60 ) {
       setSession( session + 1 )
       setCurrentMin( session + 1 )
     }
   }
   const increaseBreak = () => {
-    if ( breakTime < 60 ) {
+    if ( !playing && breakTime < 60 ) {
       setBreakTime( breakTime + 1 )
     }
   }
   const decreaseSession = () => {
-    if ( session > 1 ) {
+    if ( !playing && session > 1 ) {
       setSession( session - 1 )
       setCurrentMin( session - 1 )
     }
   }
   const decreaseBreak = () => {
-    if ( breakTime > 1 ) {
+    if ( !playing && breakTime > 1 ) {
       setBreakTime( breakTime - 1 )
     }
   }
@@ -90,6 +90,9 @@ function App () {
     setCurrentMin( 25 )
     setCurrentSec( 0 )
     setInSession( true )
+    clearInterval( intervalRef.current );
+    sound.pause()
+    sound.currentTime = 0
   }
 
   return (
@@ -112,8 +115,8 @@ function App () {
             </div>
           </div>
 
-          <div className='settings'>
-            <div className="length-control">
+          <div className='settings '>
+            <div className={playing ? 'length-control disabled-section' : 'length-control'}>
               <div id="break-label">
                 <h4>
                   Break Length
@@ -125,7 +128,7 @@ function App () {
                 </button>
                 <div className="btn-level" id="break-length">
                   <h4>
-                    {String( breakTime )}
+                    {breakTime}
                   </h4>
                 </div>
                 <button className="btn-level" id="break-increment" value="+" onClick={increaseBreak}>
@@ -134,7 +137,7 @@ function App () {
 
               </div>
             </div>
-            <div className="length-control">
+            <div className={playing ? 'length-control disabled-section' : 'length-control'}>
               <div id="session-label">
                 <h4>
                   Session Length
