@@ -16,19 +16,17 @@ function App () {
 
   const intervalRef = useRef( null );
 
-  const calculateTimeLeft = () => {
-    if ( currentSec === 0 && currentMin > 0 ) {
-      setCurrentMin( currentMin - 1 )
-      setCurrentSec( 59 )
-    } else if ( currentSec > 0 ) {
-      setCurrentSec( currentSec - 1 )
-    } else if ( currentSec === 0 && currentMin === 0 ) {
-      setPlaying( false )
-    }
-  };
-
   useEffect( () => {
-    console.log( { playing } );
+    const calculateTimeLeft = () => {
+      if ( currentSec === 0 && currentMin > 0 ) {
+        setCurrentMin( currentMin - 1 )
+        setCurrentSec( 59 )
+      } else if ( currentSec > 0 ) {
+        setCurrentSec( currentSec - 1 )
+      } else if ( currentSec === 0 && currentMin === 0 ) {
+        setPlaying( false )
+      }
+    }
     if ( playing ) {
       intervalRef.current = setInterval( () => {
         calculateTimeLeft();
@@ -38,7 +36,7 @@ function App () {
     }
 
     return () => clearInterval( intervalRef.current );
-  }, [calculateTimeLeft, playing] );
+  }, [currentMin, currentSec, playing] );
 
   const handleStart = () => {
     setPlaying( true );
@@ -60,7 +58,6 @@ function App () {
   const increaseBreak = () => {
     if ( breakTime < 60 ) {
       setBreakTime( breakTime + 1 )
-      setCurrentMin( breakTime + 1 )
     }
   }
   const decreaseSession = () => {
@@ -72,7 +69,6 @@ function App () {
   const decreaseBreak = () => {
     if ( breakTime > 1 ) {
       setBreakTime( breakTime - 1 )
-      setCurrentMin( breakTime - 1 )
     }
   }
 
@@ -103,7 +99,9 @@ function App () {
                 {inSession ? 'Session' : 'Break'}
               </div>
               <div id="time-left">
-                {`${String( currentMin ).padStart( 2, '0' )} : ${String( currentSec ).padStart( 2, '0' )}`}
+                <p className='minSection'>{String( currentMin ).padStart( 2, '0' )}</p>
+                <p className='time-separator'>:</p>
+                <p className='secSection'>{String( currentSec ).padStart( 2, '0' )}</p>
               </div>
             </div>
           </div>

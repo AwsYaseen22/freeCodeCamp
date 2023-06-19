@@ -110,10 +110,23 @@ button{
   color: rgb(34, 132, 4);
 }
 #timer-label{
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  padding-top: 30px;
 }
 #time-left {
   font-size: 4rem;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+.minSection{
+  width: 100px;
+}
+.secSection{
+  width: 100px;
+}
+
+.time-separator{
+  width: 15px;
 }
