@@ -1,33 +1,95 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css';
 
 
 function App () {
-  const [state, setState] = useState( { break: 5, session: 25, playing: false } )
 
-  const playPause = () => {
-    setState( { ...state, playing: !state.playing } )
-  }
+  const [breakTime, setBreakTime] = useState( 1 )
+  const [session, setSession] = useState( 1 )
+  const [playing, setPlaying] = useState( false )
+  const [inSession, setInSession] = useState( true )
+  const [inBreak, setInBreak] = useState( false )
+  const [currentMin, setCurrentMin] = useState( session )
+  const [currentSec, setCurrentSec] = useState( 0 )
 
-  const increase = ( item ) => {
-    if ( state[item] < 60 ) {
-      setState( { ...state, [item]: state[item] + 1 } )
+
+
+  const intervalRef = useRef( null );
+
+  const calculateTimeLeft = () => {
+    if ( currentSec === 0 && currentMin > 0 ) {
+      setCurrentMin( currentMin - 1 )
+      setCurrentSec( 59 )
+    } else if ( currentSec > 0 ) {
+      setCurrentSec( currentSec - 1 )
+    } else if ( currentSec === 0 && currentMin === 0 ) {
+      setPlaying( false )
+    }
+  };
+
+  useEffect( () => {
+    console.log( { playing } );
+    if ( playing ) {
+      intervalRef.current = setInterval( () => {
+        calculateTimeLeft();
+      }, 1000 );
+    } else {
+      clearInterval( intervalRef.current );
+    }
+
+    return () => clearInterval( intervalRef.current );
+  }, [calculateTimeLeft, playing] );
+
+  const handleStart = () => {
+    setPlaying( true );
+  };
+
+  const handlePause = () => {
+    setPlaying( false );
+  };
+
+
+
+
+  const increaseSession = () => {
+    if ( session < 60 ) {
+      setSession( session + 1 )
+      setCurrentMin( session + 1 )
     }
   }
-  const decrease = ( item ) => {
-    if ( state[item] > 1 ) {
-      setState( { ...state, [item]: state[item] - 1 } )
+  const increaseBreak = () => {
+    if ( breakTime < 60 ) {
+      setBreakTime( breakTime + 1 )
+      setCurrentMin( breakTime + 1 )
     }
   }
+  const decreaseSession = () => {
+    if ( session > 1 ) {
+      setSession( session - 1 )
+      setCurrentMin( session - 1 )
+    }
+  }
+  const decreaseBreak = () => {
+    if ( breakTime > 1 ) {
+      setBreakTime( breakTime - 1 )
+      setCurrentMin( breakTime - 1 )
+    }
+  }
+
+
+
+
 
   const reset = () => {
-    setState( {
-      break: 5,
-      session: 25,
-      playing: false
-    } )
-
+    setBreakTime( 1 )
+    setSession( 1 )
+    setPlaying( false )
+    setCurrentMin( 1 )
+    setCurrentSec( 0 )
+    setInSession( true )
+    setInBreak( false )
   }
+
   return (
     <div className="App">
 
@@ -38,10 +100,10 @@ function App () {
           <div className="timer" >
             <div className="timer-wrapper">
               <div id="timer-label">
-                Session
+                {inSession ? 'Session' : 'Break'}
               </div>
               <div id="time-left">
-                25:00
+                {`${String( currentMin ).padStart( 2, '0' )} : ${String( currentSec ).padStart( 2, '0' )}`}
               </div>
             </div>
           </div>
@@ -54,15 +116,15 @@ function App () {
                 </h4>
               </div>
               <div className='control'>
-                <button className="btn-level" id="break-decrement" value="-" onClick={() => decrease( 'break' )}>
+                <button className="btn-level" id="break-decrement" value="-" onClick={decreaseBreak}>
                   <i className="fa fa-circle-minus fa-2x decrease"></i>
                 </button>
                 <div className="btn-level" id="break-length">
                   <h4>
-                    {String( state.break )}
+                    {String( breakTime )}
                   </h4>
                 </div>
-                <button className="btn-level" id="break-increment" value="+" onClick={() => increase( 'break' )}>
+                <button className="btn-level" id="break-increment" value="+" onClick={increaseBreak}>
                   <i className="fa fa-circle-plus fa-2x increase"></i>
                 </button>
 
@@ -75,31 +137,31 @@ function App () {
                 </h4>
               </div>
               <div className='control'>
-                <button className="btn-level" id="break-decrement" value="-" onClick={() => decrease( 'session' )}>
+                <button className="btn-level" id="session-decrement" value="-" onClick={decreaseSession}>
                   <i className="fa fa-circle-minus fa-2x decrease"></i>
                 </button>
-                <div className="btn-level" id="break-length">
+                <div className="btn-level" id="session-length">
                   <h4>
-                    {state.session}
+                    {session}
                   </h4>
                 </div>
-                <button className="btn-level" id="break-increment" value="+" onClick={() => increase( 'session' )}>
+                <button className="btn-level" id="session-increment" value="+" onClick={increaseSession}>
                   <i className="fa fa-circle-plus fa-2x increase"></i>
                 </button>
 
               </div>
             </div>
             <div className="length-control">
-              <div id="break-label">
+              <div id="controller-label">
                 <h4>
                   Controlers
                 </h4>
               </div>
               <div className='controler'>
-                <button id="start_stop" onClick={playPause}>
+                <button id="start_stop" onClick={playing ? handlePause : handleStart}>
                   {/* switch the icon for play and pause */}
-                  {!state.playing && <i className="fa-regular fa-circle-play fa-3x"></i>}
-                  {state.playing && < i className="fa-regular fa-circle-pause fa-3x"></i>}
+                  {!playing && <i className="fa-regular fa-circle-play fa-3x"></i>}
+                  {playing && < i className="fa-regular fa-circle-pause fa-3x"></i>}
                 </button>
                 <button id="reset" onClick={reset}>
                   <i className="fa fa-arrows-rotate fa-3x"></i>

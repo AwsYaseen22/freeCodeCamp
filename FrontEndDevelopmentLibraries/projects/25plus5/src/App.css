@@ -1,4 +1,5 @@
 body {
+  font-family: 'Electrolize', sans-serif;
   background-color: gray;
 }
 
@@ -71,11 +72,7 @@ body {
   background-color: lightgray;
   padding: 5px 5px;
 }
-.control h3 {
-  background-color: green;
-  margin: 10px;
-  align-self: baseline;
-}
+
 
 .timer-wrapper{
   background-color: orange;
