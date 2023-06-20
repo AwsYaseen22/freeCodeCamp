@@ -14,9 +14,10 @@ function App () {
 
 
   const intervalRef = useRef( null );
-  const sound = document.getElementById( 'beep' )
+  const soundRef = useRef( null )
 
   useEffect( () => {
+    soundRef.current = document.getElementById( 'beep' )
     const calculateTimeLeft = () => {
       if ( currentSec === 0 && currentMin > 0 ) {
         setCurrentMin( currentMin - 1 )
@@ -24,7 +25,7 @@ function App () {
       } else if ( currentSec > 0 ) {
         setCurrentSec( currentSec - 1 )
       } else if ( currentSec === 0 && currentMin === 0 ) {
-        sound.play()
+        soundRef.current.play()
         setPlaying( false )
         setTimeout( () => {
           if ( inSession ) {
@@ -42,13 +43,13 @@ function App () {
     if ( playing ) {
       intervalRef.current = setInterval( () => {
         calculateTimeLeft();
-      }, 1000 );
+      }, 100 );
     } else {
       clearInterval( intervalRef.current );
     }
 
     return () => clearInterval( intervalRef.current );
-  }, [breakTime, currentMin, currentSec, inSession, playing, session] );
+  }, [breakTime, currentMin, currentSec, inSession, playing, session, soundRef] );
 
   const handleStart = () => {
     setPlaying( true );
@@ -91,8 +92,8 @@ function App () {
     setCurrentSec( 0 )
     setInSession( true )
     clearInterval( intervalRef.current );
-    sound.pause()
-    sound.currentTime = 0
+    soundRef.current.pause()
+    soundRef.current.currentTime = 0
   }
 
   return (
@@ -108,9 +109,10 @@ function App () {
                 {inSession ? 'Session' : 'Break'}
               </div>
               <div id="time-left" className={playing ? inSession ? 'in-session' : 'in-break' : ''}>
-                <p className='minSection'>{String( currentMin ).padStart( 2, '0' )}</p>
+                {String( currentMin ).padStart( 2, '0' )}:{String( currentSec ).padStart( 2, '0' )}
+                {/* <p className='minSection'>{String( currentMin ).padStart( 2, '0' )}</p>
                 <p className='time-separator'>:</p>
-                <p className='secSection'>{String( currentSec ).padStart( 2, '0' )}</p>
+                <p className='secSection'>{String( currentSec ).padStart( 2, '0' )}</p> */}
               </div>
             </div>
           </div>
