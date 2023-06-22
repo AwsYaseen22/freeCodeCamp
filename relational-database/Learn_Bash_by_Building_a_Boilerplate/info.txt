@@ -16,3 +16,5 @@ You can rename them with mv like this: mv <filename> <new_filename>. mv stands f
 
 You can use find to find things or view a file tree
 
+You can use it to search for something with find -name <filename>. Use find with the -name flag to search for index.html
+
