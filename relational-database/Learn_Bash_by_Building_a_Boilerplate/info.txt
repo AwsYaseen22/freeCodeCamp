@@ -7,3 +7,6 @@ You can see what's in a file with more <filename>.
 
 List the contents of folder in "long list format". Do that by adding the -l flag to the "list" command.
 
+You can copy a file with cp <file> <destination>. cp stands for "copy"
+
+You can remove a file with rm <filename>
