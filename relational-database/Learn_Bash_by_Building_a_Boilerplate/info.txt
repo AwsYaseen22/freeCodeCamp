@@ -24,3 +24,6 @@ There's a -r flag that says, remove directories and their contents recursively. 
 
 You can print to a file instead of the terminal with echo text >> filename
 
+we can use -r flag with cp to copy folder with its content to a new destination if the destination not found create new one
+
+
