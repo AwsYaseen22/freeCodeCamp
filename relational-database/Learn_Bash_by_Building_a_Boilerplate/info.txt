@@ -1,0 +1,9 @@
+echo hello terminal
+pwd stands for "print working directory".
+ls stands for "list".
+cd stands for "change directory".
+You can see what's in a file with more <filename>.
+
+
+List the contents of folder in "long list format". Do that by adding the -l flag to the "list" command.
+
