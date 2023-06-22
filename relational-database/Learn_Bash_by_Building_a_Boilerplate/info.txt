@@ -21,3 +21,6 @@ You can use it to search for something with find -name <filename>. Use find with
 You can use rmdir <directory_name> to remove a folder. rmdir stands for "remove directory".
 
 There's a -r flag that says, remove directories and their contents recursively. That will remove the folder and everything in it. 
+
+You can print to a file instead of the terminal with echo text >> filename
+
