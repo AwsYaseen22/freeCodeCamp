@@ -18,3 +18,4 @@ You can use find to find things or view a file tree
 
 You can use it to search for something with find -name <filename>. Use find with the -name flag to search for index.html
 
+You can use rmdir <directory_name> to remove a folder. rmdir stands for "remove directory".
