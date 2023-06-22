@@ -12,3 +12,7 @@ You can copy a file with cp <file> <destination>. cp stands for "copy"
 You can remove a file with rm <filename>
 
 You can rename them with mv like this: mv <filename> <new_filename>. mv stands for "move", it can rename or move something. Rename roboto.font to roboto.woff
+
+
+You can use find to find things or view a file tree
+
