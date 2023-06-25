@@ -7,3 +7,13 @@ to list the dabases:
 create a database:
 CREATE DATABASE database_name;
 
+connect to a database by entering:
+\c database_name
+
+to display the tables:
+\d
+
+to create a table:
+CREATE TABLE table_name();
+
+
