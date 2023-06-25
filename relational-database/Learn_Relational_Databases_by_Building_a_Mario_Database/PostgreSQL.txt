@@ -1,2 +1,9 @@
-Log in by typing psql --username=freecodecamp --dbname=postgres
+Log in by typing: 
+psql --username=freecodecamp --dbname=postgres
+
+to list the dabases:
+\l
+
+create a database:
+CREATE DATABASE database_name;
 
