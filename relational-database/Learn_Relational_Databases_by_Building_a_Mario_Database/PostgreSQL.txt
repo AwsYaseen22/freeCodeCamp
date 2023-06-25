@@ -17,3 +17,5 @@ to create a table:
 CREATE TABLE table_name();
 
 
+You can view more details about a table by adding the table name after the display command like this: 
+\d table_name
